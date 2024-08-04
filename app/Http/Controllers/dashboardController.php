@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class dashboardController extends Controller
 {
@@ -24,6 +27,12 @@ class dashboardController extends Controller
     {
         $users = User::all();
         return view('dashboard.users', ['users' => $users]);
+    }
+
+    public function products()
+    {
+        $categories = DB::table('tb_category')->select('id', 'name_category')->get();
+        return view('dashboard.products.products', ['categories' => $categories]);
     }
 
     /**

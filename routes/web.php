@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('dashboard', dashboardController::class);
-    Route::resource('products', productsController::class);
+    Route::get('/products', [dashboardController::class, 'products'])->name('dashboard.products');
     Route::get('/user', [dashboardController::class, 'user'])->name('dashboard.user');
 });
 
