@@ -21,6 +21,11 @@ class loginController extends Controller
         ]);
 
         if (Auth::attempt($cred)) {
+             /** @var \App\Models\User $users **/
+            $users = Auth::user();
+            $users->activity_status = '1';
+            $users->save();
+
             $request->session()->regenerate();
             return redirect('/');
         }
@@ -32,10 +37,13 @@ class loginController extends Controller
 
     public function logout(Request $request)
     {
+        /** @var \App\Models\User $users **/
+        $users = Auth::user();
+        $users->activity_status = '0';
+        $users->save();
+        
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');

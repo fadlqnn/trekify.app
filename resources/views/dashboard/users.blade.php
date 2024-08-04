@@ -95,9 +95,15 @@
                             {{ $u->role->name_role }}
                         </td>
                         <td class="px-6 py-4">
+                            @if ($u->activity_status == 1)
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
                             </div>
+                            @else
+                            <div class="flex items-center">
+                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Offline
+                            </div>
+                            @endif
                         </td>
                         <td class="px-6 py-4">
                             <!-- Modal toggle -->
